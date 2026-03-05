@@ -16,34 +16,23 @@ function useUsers () {
     return { data }
 }
 
-function useOneUser(id: number) {
-    const [user, setUser] = useState<users[]>([])
-
-    useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-            .then((response) => response.json())
-            .then((json) => {
-                setUser(json)
-            });
-    }, [id])
-
-    return { user }
-}
-
 export function Dashboard() {
 
+    /*
     const items = [
         {id: 1, title: "My profile"},
         {id: 2, title: "My project"},
         {id: 3, title: "My teams"}
     ]
+    */
+   const { data } = useUsers()
 
     return (
         <>
             <h1>Dashboard Page</h1>
             <ul>
                 {
-                    items.map(item => (
+                    data.map(item => (
                         <li key={item.id}>
                             <Link to={`/dashboard/${item.id}`}>
                                 <h2>{item.title}</h2>
